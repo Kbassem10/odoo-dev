@@ -1,0 +1,11 @@
+<odoo>
+    <template id="student_data" name="Student Website">
+        <t t-call="website.layout">
+            <div class="oe_studecture">
+                <div class="container">
+                    <center><h3>Student Details</h3></center>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
