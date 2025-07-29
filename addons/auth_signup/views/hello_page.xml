@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Hello Page Template -->
+        <template id="hello_page" name="Hello Page">
+            <t t-call="web.layout">
+                <t t-set="title">Hello</t>
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 col-lg-6">
+                            <div class="card shadow">
+                                <div class="card-header text-center bg-primary text-white">
+                                    <h2>Welcome!</h2>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h3>Hello, and welcome to our platform!</h3>
+                                    <p class="lead">We're glad to have you here.</p>
+                                    <div class="mt-4">
+                                        <a href="/web/login" class="btn btn-primary me-2">Login</a>
+                                        <a href="/web/signup" class="btn btn-outline-primary">Sign Up</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
