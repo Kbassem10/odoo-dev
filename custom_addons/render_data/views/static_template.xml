@@ -1,0 +1,16 @@
+<odoo>
+  <template id="static_template" name="Static Book List Page">
+    <t t-call="website.layout">
+      <div class="container mt-5">
+        <h2>📚 Static Book List</h2>
+        <ul>
+          <t t-foreach="books" t-as="book">
+            <li>
+              <strong><t t-esc="book['title']"/></strong> by <t t-esc="book['author']"/>
+            </li>
+          </t>
+        </ul>
+      </div>
+    </t>
+  </template>
+</odoo>
