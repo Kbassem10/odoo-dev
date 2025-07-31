@@ -1,0 +1,79 @@
+<odoo>
+  <template id="user_form_template" name="User Info Form">
+    <t t-call="website.layout">
+      <div class="container mt-5">
+        <h2>User Info Form</h2>
+        
+        <t t-if="success_message">
+          <div class="alert alert-success" role="alert">
+            <t t-esc="success_message"/>
+          </div>
+        </t>
+        
+        <t t-if="error_message">
+          <div class="alert alert-danger" role="alert">
+            <t t-esc="error_message"/>
+          </div>
+        </t>
+        
+        <form action="/hello/form/submit" method="post">
+          <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+          <div class="mb-3">
+            <label class="form-label">Name:</label>
+            <input type="text" name="name" class="form-control" t-att-value="user_info.name if user_info else ''" required="required"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email:</label>
+            <input type="email" name="email" class="form-control" t-att-value="user_info.email if user_info else ''" required="required"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Age:</label>
+            <input type="number" name="age" class="form-control" t-att-value="user_info.age if user_info else ''"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Birthdate:</label>
+            <input type="date" name="birthdate" class="form-control" t-att-value="user_info.birthdate if user_info else ''"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Favorite Color:</label>
+            <input type="text" name="fav_color" class="form-control" t-att-value="user_info.fav_color if user_info else ''"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Favorite Number:</label>
+            <input type="number" name="fav_number" class="form-control" t-att-value="user_info.fav_number if user_info else ''"/>
+          </div>
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+              <t t-if="user_info">Update Information</t>
+              <t t-else="">Save Information</t>
+            </button>
+            <t t-if="user_info">
+              <a href="/hello/form/delete" class="btn btn-danger" 
+                 onclick="return confirm('Are you sure you want to delete your information? This action cannot be undone.')">
+                Delete My Data
+              </a>
+            </t>
+          </div>
+        </form>
+        
+        <!-- Display current saved information -->
+        <t t-if="user_info">
+          <div class="mt-5">
+            <h4>Your Current Information:</h4>
+            <div class="card">
+              <div class="card-body">
+                <p><strong>Name:</strong> <t t-esc="user_info.name"/></p>
+                <p><strong>Email:</strong> <t t-esc="user_info.email"/></p>
+                <p><strong>Age:</strong> <t t-esc="user_info.age"/></p>
+                <p><strong>Birthdate:</strong> <t t-esc="user_info.birthdate"/></p>
+                <p><strong>Favorite Color:</strong> <t t-esc="user_info.fav_color"/></p>
+                <p><strong>Favorite Number:</strong> <t t-esc="user_info.fav_number"/></p>
+                <p><strong>Last Updated:</strong> <t t-esc="user_info.register_date"/></p>
+              </div>
+            </div>
+          </div>
+        </t>
+      </div>
+    </t>
+  </template>
+</odoo>
