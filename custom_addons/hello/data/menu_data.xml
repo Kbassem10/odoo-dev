@@ -40,5 +40,13 @@
             <field name="parent_id" ref="menu_hello_main"/>
             <field name="sequence">40</field>
         </record>
+
+        <!-- Users List Submenu -->
+        <record id="menu_users_list" model="website.menu">
+            <field name="name">All Users</field>
+            <field name="url">/hello/users</field>
+            <field name="parent_id" ref="menu_hello_main"/>
+            <field name="sequence">50</field>
+        </record>
     </data>
 </odoo>

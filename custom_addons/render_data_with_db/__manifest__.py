@@ -15,6 +15,8 @@
     'depends': ['base', 'website'],
     'data': [
         'views/user_form_template.xml',
+        'views/users_list_template.xml',
+        'views/user_info_views.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,

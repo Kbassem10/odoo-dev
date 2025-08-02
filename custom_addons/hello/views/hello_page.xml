@@ -48,6 +48,15 @@
                                         <div class="col-md-6 mb-3">
                                             <div class="card h-100">
                                                 <div class="card-body">
+                                                    <h5 class="card-title">👥 All Users</h5>
+                                                    <p class="card-text">Browse all user profiles</p>
+                                                    <a href="/hello/users" class="btn btn-outline-primary">Visit</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="card h-100">
+                                                <div class="card-body">
                                                     <h5 class="card-title">⚙️ Odoo Backend</h5>
                                                     <p class="card-text">Access Odoo dashboard</p>
                                                     <a href="/web" class="btn btn-outline-success">Go to Odoo</a>

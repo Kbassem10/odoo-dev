@@ -1,0 +1,168 @@
+<odoo>
+    <template id="users_list_template" name="All Users Profiles">
+        <t t-call="website.layout">
+            <div class="container mt-5 mb-5">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Header Section -->
+                        <div class="text-center mb-5">
+                            <h1 class="display-5 fw-bold text-primary mb-3">
+                                <i class="fa fa-users me-2"></i>User Profiles Directory
+                            </h1>
+                            <p class="lead text-muted">Browse all registered user profiles</p>
+                        </div>
+
+                        <!-- Search and Filter Section -->
+                        <div class="card shadow-sm border-0 mb-4">
+                            <div class="card-body">
+                                <form method="get" class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label">Search by Name/Email</label>
+                                        <input type="text" name="search" class="form-control" 
+                                               t-att-value="search_term" placeholder="Enter name or email"/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Favorite Color</label>
+                                        <select name="color_filter" class="form-select">
+                                            <option value="">All Colors</option>
+                                            <t t-foreach="available_colors" t-as="color">
+                                                <option t-att-value="color" t-att-selected="color == color_filter">
+                                                    <t t-esc="color"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Age Range</label>
+                                        <select name="age_filter" class="form-select">
+                                            <option value="">All Ages</option>
+                                            <option value="young" t-att-selected="age_filter == 'young'">18-30</option>
+                                            <option value="middle" t-att-selected="age_filter == 'middle'">31-50</option>
+                                            <option value="senior" t-att-selected="age_filter == 'senior'">51+</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-end">
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <i class="fa fa-search me-1"></i>Search
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Statistics Card -->
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <div class="card border-primary">
+                                    <div class="card-body text-center">
+                                        <h4 class="text-primary"><t t-esc="total_users"/></h4>
+                                        <small class="text-muted">Total Users</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-success">
+                                    <div class="card-body text-center">
+                                        <h4 class="text-success"><t t-esc="users_with_complete_info"/></h4>
+                                        <small class="text-muted">Complete Profiles</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-info">
+                                    <div class="card-body text-center">
+                                        <h4 class="text-info"><t t-esc="len(available_colors)"/></h4>
+                                        <small class="text-muted">Unique Colors</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-warning">
+                                    <div class="card-body text-center">
+                                        <h4 class="text-warning"><t t-esc="recent_users"/></h4>
+                                        <small class="text-muted">Recent (7 days)</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Users Grid -->
+                        <div class="row">
+                            <t t-if="not users">
+                                <div class="col-12">
+                                    <div class="alert alert-info text-center">
+                                        <i class="fa fa-info-circle me-2"></i>
+                                        No users found matching your criteria.
+                                    </div>
+                                </div>
+                            </t>
+                            <t t-foreach="users" t-as="user">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card h-100 shadow-sm border-0">
+                                        <div class="card-header bg-light">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5 class="card-title mb-0">
+                                                    <i class="fa fa-user-circle me-2 text-primary"></i>
+                                                    <t t-esc="user.name"/>
+                                                </h5>
+                                                <small class="text-muted">
+                                                    <t t-esc="user.register_date.strftime('%b %d, %Y') if user.register_date else 'N/A'"/>
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-2">
+                                                <i class="fa fa-envelope text-muted me-2"></i>
+                                                <small><t t-esc="user.email"/></small>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6" t-if="user.age">
+                                                    <small class="text-muted">Age:</small><br/>
+                                                    <strong><t t-esc="user.age"/> years</strong>
+                                                </div>
+                                                <div class="col-6" t-if="user.birthdate">
+                                                    <small class="text-muted">Birth:</small><br/>
+                                                    <strong><t t-esc="user.birthdate.strftime('%b %d, %Y') if user.birthdate else 'N/A'"/></strong>
+                                                </div>
+                                            </div>
+                                            <t t-if="user.fav_color or user.fav_number">
+                                                <hr class="my-3"/>
+                                                <div class="row">
+                                                    <div class="col-6" t-if="user.fav_color">
+                                                        <small class="text-muted">Favorite Color:</small><br/>
+                                                        <span class="badge rounded-pill" 
+                                                              t-attf-style="background-color: #{user.fav_color.lower() if user.fav_color else '#6c757d'}; color: white;">
+                                                            <t t-esc="user.fav_color"/>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-6" t-if="user.fav_number">
+                                                        <small class="text-muted">Lucky Number:</small><br/>
+                                                        <strong class="text-primary"><t t-esc="user.fav_number"/></strong>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+
+                        <!-- Pagination -->
+                        <t t-if="pager">
+                            <div class="d-flex justify-content-center mt-4">
+                                <t t-call="website.pager"/>
+                            </div>
+                        </t>
+
+                        <!-- Back to Form Link -->
+                        <div class="text-center mt-5">
+                            <a href="/hello/form" class="btn btn-outline-primary btn-lg">
+                                <i class="fa fa-edit me-2"></i>Manage Your Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
