@@ -7,15 +7,54 @@
                 <t t-set="title">Hello Page</t>
                 <div class="container mt-5">
                     <div class="row justify-content-center">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="card text-center">
                                 <div class="card-header bg-primary text-white">
-                                    <h2>Hello World!</h2>
+                                    <h2>🏠 Hello World!</h2>
                                 </div>
                                 <div class="card-body">
-                                    <h4>Welcome to our Hello Module</h4>
-                                    <p class="lead">This is a simple hello page created with Odoo.</p>
-                                    <a href="/web" class="btn btn-primary">Go to Odoo</a>
+                                    <h4>Welcome to our Custom Addons Hub</h4>
+                                    <p class="lead">This is your central place to access all custom modules.</p>
+                                    
+                                    <!-- Quick Navigation -->
+                                    <div class="row mt-4">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">📚 Student Books</h5>
+                                                    <p class="card-text">View student book collection</p>
+                                                    <a href="/student" class="btn btn-outline-primary">Visit</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">📖 Static Books</h5>
+                                                    <p class="card-text">Browse static book list</p>
+                                                    <a href="/books" class="btn btn-outline-primary">Visit</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">👤 User Profile</h5>
+                                                    <p class="card-text">Manage your information</p>
+                                                    <a href="/hello/form" class="btn btn-outline-primary">Visit</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">⚙️ Odoo Backend</h5>
+                                                    <p class="card-text">Access Odoo dashboard</p>
+                                                    <a href="/web" class="btn btn-outline-success">Go to Odoo</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
